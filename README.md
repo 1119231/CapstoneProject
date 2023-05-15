@@ -14,3 +14,7 @@ App Name- Instant Delicious
 Description-
 
 Features-
+Search for recipes 
+Filtering the recipes
+Add the details like food name, ingredients and how to cook
+Share the recipes through social media
