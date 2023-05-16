@@ -23,5 +23,9 @@ Notification - users can enable notification so that they will be notified when 
 Rating
 Favourites - can add recipes to favourites
 Edit or Delete - users can edit or delete a recipie
+comment - User can add comments for recipies
+settings - (Dark mode/ privacy / change username)
+user login - user can create account using their emailid/ phone
+my account - user can view their profile and their posts, rating etc
 
 > > > > > > > c3835fac74b1635c11d709869c30878df0b812f3
