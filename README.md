@@ -16,11 +16,11 @@ Description-
 
 Features-
 Search for recipes
-Filtering the recipes
+Filtering the recipes - user can filter their search options as different categories
 Add the details like food name, ingredients and how to cook
 Share the recipes through social media
 Notification - users can enable notification so that they will be notified when it's time for breakfast,lunch, dinner,...
-Rating
+Rating -  user can rate others recipe
 Favourites - can add recipes to favourites
 Edit or Delete - users can edit or delete a recipie
 comment - User can add comments for recipies
