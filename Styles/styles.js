@@ -17,18 +17,10 @@ const styles = StyleSheet.create({
   },
   recipeTitle: {
     fontWeight: 'bold',
-    fontSize: 13,
-    padding: 10,
+    fontSize: 12,
     // marginBottom: 100,
 
   },
-  btn_style: {
-  
-  },
-  details: {
-    color:'green'
-  },
-
   image: {
     width: '100%',
     height: 200,
@@ -51,11 +43,10 @@ const styles = StyleSheet.create({
     marginTop: 12,
     paddingLeft: 10,
     paddingBottom: 10,
-    paddingLeft: 150,
-    fontSize: 15,
+    alignItems: 'left',
+    fontSize: 14,
     fontStyle: 'normal',
-    color: '#1B5E20',
-    backgroundColor: '#A5D6A7'
+    color: '#32cd32',
   },
 
   image: {
@@ -66,7 +57,10 @@ const styles = StyleSheet.create({
   },
 
 
-
+  btn_style: {
+    backgroundColor: '32cd32',
+    borderColor: '#32cd32',
+  },
 });
 
 export default styles
