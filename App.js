@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, Button, Image, TextInput, TouchableOpacity, ScrollView } from 'react-native';
 import styles from './Styles/styles';
 import Header from './Header/header';
-import Icon from 'react-native-vector-icons/FontAwesome';
 
 const RecipeApp = () => {
   const [recipes, setRecipes] = useState([]);
@@ -72,7 +71,7 @@ const RecipeApp = () => {
       },
       {
         id: 6,
-        title: 'Grilled Sandwich',
+        title: 'Grilled Cheese Sandwich',
         ingredients: ['Bread slices', 'Cheese slices', 'Butter'],
         instructions: 'Heat a non-stick skillet or griddle over medium heat. Butter one side of each bread slice.' +
           'Place a cheese slice between two bread slices, with the buttered sides facing outwards' +
@@ -90,18 +89,6 @@ const RecipeApp = () => {
   };
 
 
-
-  const addRecipeToFavorites = (recipe) => {
-    const { title, ingredients, instructions } = recipe;
-    setFavorites([...favorites, { title, ingredients, instructions }]);
-  };
-
-
-
-  // const addRecipeToFavorites = (recipe) => {
-  //   setFavorites([...favorites, recipe]);
-  // };
-
   const addNoteToRecipe = (recipeId, note) => {
     const updatedRecipes = recipes.map((recipe) => {
       if (recipe.id === recipeId) {
@@ -112,8 +99,6 @@ const RecipeApp = () => {
 
     setRecipes(updatedRecipes);
   };
-
-
 
   const toggleViewMode = () => {
     setViewMode(viewMode === 'grid' ? 'list' : 'grid');
@@ -130,7 +115,7 @@ const RecipeApp = () => {
       </View> */}
       <Header />
       <View >
-       
+        <Button styles={styles.head} title={viewMode === 'grid' ? 'List View' : 'Grid View'} onPress={toggleViewMode} />
       </View>
 
       <ScrollView>
@@ -140,7 +125,14 @@ const RecipeApp = () => {
         ) : (
           <View style={viewMode === 'grid' ? styles.gridContainer : styles.listContainer}>
 
-           
+            {recipes.map((recipe) => (
+              <RecipeCard
+                key={recipe.id}
+                recipe={recipe}
+                addToFavorites={addRecipeToFavorites}
+                addNote={addNoteToRecipe}
+              />
+            ))}
 
           </View>
         )}
@@ -151,23 +143,13 @@ const RecipeApp = () => {
         ) : (
           <View style={viewMode === 'grid' ? styles.gridContainer : styles.listContainer}>
             {favorites.map((recipe) => (
-             
+              <ScrollView>
                 <TouchableOpacity>
                   <Text key={recipe.title}>{recipe.title}</Text>
-                 
-
-
-                  {/* // <RecipeCard
-            //   key={recipe.id}
-            //   recipe={recipe}
-            //   addToFavorites={addRecipeToFavorites}
-            //   addNote={addNoteToRecipe}
-            // /> */}
 
                 </TouchableOpacity>
-               
 
-            
+              </ScrollView>
             ))}
 
           </View>
@@ -176,17 +158,14 @@ const RecipeApp = () => {
     </View>
   );
 };
-
-
-
 const RecipeDetails = ({ ingredients, instructions }) => (
   <View>
-    <Text style={styles.details}>Ingredients:</Text>
+    <Text>Ingredients:</Text>
     {ingredients.map((ingredient, index) => (
       <Text key={index}>{ingredient}</Text>
     ))}
 
-    <Text style={styles.details}>Instructions:</Text>
+    <Text>Instructions:</Text>
     <Text>{instructions}</Text>
   </View>
 );
@@ -194,10 +173,6 @@ const RecipeDetails = ({ ingredients, instructions }) => (
 const RecipeCard = ({ recipe, addToFavorites, addNote, viewMode }) => {
   const [note, setNote] = useState('');
   const [showDetails, setShowDetails] = useState(false);
-
-  const handleAddToFavorite = () => {
-    addToFavorites(recipe);
-  };
 
   const handleAddNote = () => {
     addNote(recipe.id, note);
@@ -213,7 +188,7 @@ const RecipeCard = ({ recipe, addToFavorites, addNote, viewMode }) => {
   return (
 
     <View style={viewMode === 'grid' ? styles.recipeCardGrid : styles.recipeCardList}>
-     
+      <ScrollView>
         <TouchableOpacity onPress={handleToggleDetails}>
           <Text style={styles.recipeTitle}>{recipe.title}</Text>
         </TouchableOpacity>
@@ -221,11 +196,6 @@ const RecipeCard = ({ recipe, addToFavorites, addNote, viewMode }) => {
           <RecipeDetails ingredients={recipe.ingredients} instructions={recipe.instructions} />
         )}
         <Image source={{ uri: recipe.jpg }} style={styles.img} />
-
-        <View style={styles.btn_style}>
-          <Button style={styles.btn_style} title="Add to Favorites" onPress={handleAddToFavorite} />
-        
-        </View>
 
         <View>
           <TextInput
@@ -237,15 +207,12 @@ const RecipeCard = ({ recipe, addToFavorites, addNote, viewMode }) => {
             <Text>Clear</Text>
           </TouchableOpacity>
         </View>
-   
+      </ScrollView>
 
     </View>
 
 
   );
 };
-
-
-
 
 export default RecipeApp;
