@@ -89,6 +89,18 @@ const RecipeApp = () => {
   };
 
 
+
+  const addRecipeToFavorites = (recipe) => {
+    const { title, ingredients, instructions } = recipe;
+    setFavorites([...favorites, { title, ingredients, instructions }]);
+  };
+
+
+
+  // const addRecipeToFavorites = (recipe) => {
+  //   setFavorites([...favorites, recipe]);
+  // };
+
   const addNoteToRecipe = (recipeId, note) => {
     const updatedRecipes = recipes.map((recipe) => {
       if (recipe.id === recipeId) {
@@ -147,6 +159,15 @@ const RecipeApp = () => {
                 <TouchableOpacity>
                   <Text key={recipe.title}>{recipe.title}</Text>
 
+
+
+                  {/* // <RecipeCard
+            //   key={recipe.id}
+            //   recipe={recipe}
+            //   addToFavorites={addRecipeToFavorites}
+            //   addNote={addNoteToRecipe}
+            // /> */}
+
                 </TouchableOpacity>
 
               </ScrollView>
@@ -158,6 +179,16 @@ const RecipeApp = () => {
     </View>
   );
 };
+
+// const FavRecipecard = ({ recipe }) => {
+//   const [note, setNote] = useState('');
+//   const [showDetails, setShowDetails] = useState(false);
+
+//   const handleToggleDetails = () => {
+//     setShowDetails(!showDetails);
+//   };
+// };
+
 const RecipeDetails = ({ ingredients, instructions }) => (
   <View>
     <Text>Ingredients:</Text>
@@ -173,6 +204,10 @@ const RecipeDetails = ({ ingredients, instructions }) => (
 const RecipeCard = ({ recipe, addToFavorites, addNote, viewMode }) => {
   const [note, setNote] = useState('');
   const [showDetails, setShowDetails] = useState(false);
+
+  const handleAddToFavorite = () => {
+    addToFavorites(recipe);
+  };
 
   const handleAddNote = () => {
     addNote(recipe.id, note);
@@ -197,6 +232,10 @@ const RecipeCard = ({ recipe, addToFavorites, addNote, viewMode }) => {
         )}
         <Image source={{ uri: recipe.jpg }} style={styles.img} />
 
+        <View style="btn_style">
+          <Button title="Add to Favorites" onPress={handleAddToFavorite} />
+        </View>
+
         <View>
           <TextInput
             value={note}
@@ -214,5 +253,8 @@ const RecipeCard = ({ recipe, addToFavorites, addNote, viewMode }) => {
 
   );
 };
+
+
+
 
 export default RecipeApp;
