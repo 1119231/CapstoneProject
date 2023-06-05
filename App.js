@@ -129,9 +129,7 @@ const RecipeApp = () => {
       </View>
       </View> */}
       <Header />
-      <View >
-        <Button styles={styles.head} title={viewMode === 'grid' ? 'List View' : 'Grid View'} onPress={toggleViewMode} />
-      </View>
+      
 
       <ScrollView>
         <Text></Text>
@@ -140,14 +138,7 @@ const RecipeApp = () => {
         ) : (
           <View style={viewMode === 'grid' ? styles.gridContainer : styles.listContainer}>
 
-            {recipes.map((recipe) => (
-              <RecipeCard
-                key={recipe.id}
-                recipe={recipe}
-                addToFavorites={addRecipeToFavorites}
-                addNote={addNoteToRecipe}
-              />
-            ))}
+           
 
           </View>
         )}
