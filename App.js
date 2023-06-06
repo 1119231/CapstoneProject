@@ -19,7 +19,7 @@ const RecipeApp = () => {
         id: 1,
         title: 'Pasta Carbonara',
         ingredients: ['Spaghetti', 'Eggs', 'Bacon', 'Parmesan Cheese'],
-        instructions: '.Cook the spaghetti according to package instructions. Drain and set aside' +
+        instructions: 'Cook the spaghetti according to package instructions. Drain and set aside' +
           'In a large pan, heat olive oil over medium heat. Add minced garlic and diced onion. Cook until onion becomes translucent' +
           'Add ground beef to the pan. Cook until browned and fully cooked' +
           'Stir in tomato sauce, salt, and pepper. Simmer for 10-15 minutes' +
@@ -63,7 +63,7 @@ const RecipeApp = () => {
         id: 5,
         title: 'Greek Salad',
         ingredients: ['Cucumber', 'Onion', 'Tomatoes', 'Kalamata olives', 'Feta cheese', 'Extra virgin olive oil', "Lemon juice", 'salt', 'pepper'],
-        instructions: '.Dice the cucumber, tomatoes, and red onion into bite-sized pieces. Pit and halve the Kalamata olives.Crumble the feta cheese.' +
+        instructions: 'Dice the cucumber, tomatoes, and red onion into bite-sized pieces. Pit and halve the Kalamata olives.Crumble the feta cheese.' +
           'Chop the fresh parsley. In a large bowl, combine the diced cucumber, tomatoes, red onion, Kalamata olives, feta cheese, and fresh parsley.' +
           '  Drizzle extra virgin olive oil and lemon juice over the salad. Season with salt and pepper Toss everything together until well coated.' +
           'Serve the Greek salad as a refreshing and healthy side dish.',
@@ -88,14 +88,10 @@ const RecipeApp = () => {
     setRecipes(mockRecipes);
   };
 
-
-
   const addRecipeToFavorites = (recipe) => {
     const { title, ingredients, instructions } = recipe;
     setFavorites([...favorites, { title, ingredients, instructions }]);
   };
-
-
 
   // const addRecipeToFavorites = (recipe) => {
   //   setFavorites([...favorites, recipe]);
@@ -217,9 +213,6 @@ const RecipeCard = ({ recipe, addToFavorites, addNote, viewMode }) => {
   const handleToggleDetails = () => {
     setShowDetails(!showDetails);
   };
-
-
-
   return (
 
     <View style={viewMode === 'grid' ? styles.recipeCardGrid : styles.recipeCardList}>
