@@ -1,6 +1,6 @@
 # CapstoneProject
 
-=======
+
 
 GROUP- H
 
@@ -32,4 +32,4 @@ Features-<br>
 -Multi language recipe viewing option<br>
 -Consistent UI experience through the app<br>
 
-> > > > > > > c3835fac74b1635c11d709869c30878df0b812f3
+
