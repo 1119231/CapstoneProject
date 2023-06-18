@@ -12,12 +12,12 @@ Elvin Mappilaparambil
 
 App Name- Instant Delicious
 
-####Description-
+##Description-
 
-Features-
-Search for recipes
-Filtering the recipes - user can filter their search options as different categories
-Add the details like food name, ingredients and how to cook
+##Features-
+###Search for recipes
+###Filtering the recipes - user can filter their search options as different categories
+###Add the details like food name, ingredients and how to cook
 Share the recipes through social media
 Notification - User will be notified on new alerts 
 Rating -  user can rate others recipe
