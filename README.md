@@ -2,9 +2,9 @@
 
 =======
 
-GROUP- H
+##GROUP- H
 
-Members-
+###Members-
 Abina Parathandel Nassar
 Akshitha Vinod
 Ashley Shaji
@@ -12,7 +12,7 @@ Elvin Mappilaparambil
 
 App Name- Instant Delicious
 
-Description-
+####Description-
 
 Features-
 Search for recipes
