@@ -15,21 +15,21 @@ App Name- Instant Delicious
 Description-
 
 Features-<br>
-Search for recipes<br>
-Filtering the recipes - user can filter their search options as different categories<br>
-Add the details like food name, ingredients and how to cook<br>
-Share the recipes through social media<br>
-Notification - User will be notified on new alerts <br>
-Rating -  user can rate others recipe<br>
-Favourites - can add recipes to favourites
-Edit or Delete - users can edit or delete a recipie<br>
-comment - User can add comments for recipies<br>
-settings - (Dark mode/ privacy / change username)<br>
-user login - user can create account using their emailid/ phone<br>
-my account - user can view their profile and their posts, rating etc<br>
-Reminder  users can enable reminder so that they will be notified when it's time for breakfast,lunch, dinner,...<br>
-View (list, grid) <br>
-Add multiple photos/ upload image<br>
-Follow other members<br>
+-User can access a collection of recipes<br>
+-Add recipies to favourite category<br>
+-Add notes to the recipies<br>
+-View recipies content on thumbnail format grid or list format<br>
+-User can search for different recipies <br>
+-Set a reminder for their favourite recipies to cook on time<br>
+-Hide an existing recipe<br>
+-Add images for the recipies<br>
+-Filter recipies based on tags<br>
+-Add rating to the recipies<br>
+-Push notification for newly added recipies<br>
+-App interface can be viewed in dark and light mode<br>
+-Splash screen when app is opened by user<br>
+-Can use copy to clipboard <br>
+-Multi language recipe viewing option<br>
+-Consistent UI experience through the app<br>
 
 > > > > > > > c3835fac74b1635c11d709869c30878df0b812f3
