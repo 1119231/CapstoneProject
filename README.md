@@ -12,7 +12,7 @@ Elvin Mappilaparambil<br>
 
 App Name- Instant Delicious
 
-Description- This is an react native app, offering a delightful culinary experience right at your fingertips. Whether you're a seasoned chef or a beginner in the kitchen, TastyBites is your ultimate companion for exploring, discovering, and creating mouthwatering recipes.
+Description- This is an react native app, offering a delightful culinary experience right at your fingertips. Whether you're a seasoned chef or a beginner in the kitchen, Instant delicious is your ultimate companion for exploring, discovering, and creating mouthwatering recipes.
 
 Features-<br>
 -User can access a collection of recipes<br>
