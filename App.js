@@ -3,12 +3,18 @@ import { View, Text, Button, Image, TextInput, TouchableOpacity, ScrollView } fr
 import styles from './Styles/styles';
 import Header from './Header/header';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import fornavigation from './navigation';
+
+
 
 const RecipeApp = () => {
   const [recipes, setRecipes] = useState([]);
   const [favorites, setFavorites] = useState([]);
   const [viewMode, setViewMode] = useState('grid');
   const [searchQuery, setSearchQuery] = useState('');
+  const [isSearching, setIsSearching] = useState(false); 
   
   useEffect(() => {
     fetchRecipes();
@@ -20,7 +26,7 @@ const RecipeApp = () => {
         id: 1,
         title: 'Pasta Carbonara',
         ingredients: ['Spaghetti', 'Eggs', 'Bacon', 'Parmesan Cheese'],
-        instructions: '.Cook the spaghetti according to package instructions. Drain and set aside' +
+        instructions: 'Cook the spaghetti according to package instructions. Drain and set aside' +
           'In a large pan, heat olive oil over medium heat. Add minced garlic and diced onion. Cook until onion becomes translucent' +
           'Add ground beef to the pan. Cook until browned and fully cooked' +
           'Stir in tomato sauce, salt, and pepper. Simmer for 10-15 minutes' +
@@ -64,7 +70,7 @@ const RecipeApp = () => {
         id: 5,
         title: 'Greek Salad',
         ingredients: ['Cucumber', 'Onion', 'Tomatoes', 'Kalamata olives', 'Feta cheese', 'Extra virgin olive oil', "Lemon juice", 'salt', 'pepper'],
-        instructions: '.Dice the cucumber, tomatoes, and red onion into bite-sized pieces. Pit and halve the Kalamata olives.Crumble the feta cheese.' +
+        instructions: 'Dice the cucumber, tomatoes, and red onion into bite-sized pieces. Pit and halve the Kalamata olives.Crumble the feta cheese.' +
           'Chop the fresh parsley. In a large bowl, combine the diced cucumber, tomatoes, red onion, Kalamata olives, feta cheese, and fresh parsley.' +
           '  Drizzle extra virgin olive oil and lemon juice over the salad. Season with salt and pepper Toss everything together until well coated.' +
           'Serve the Greek salad as a refreshing and healthy side dish.',
@@ -129,12 +135,26 @@ const RecipeApp = () => {
       }
       return recipe;
     });
+    const updatedFavorites = favorites.filter((favorite) => favorite.id !== recipeId);
   
     setRecipes(updatedRecipes);
+    setFavorites(updatedFavorites);
   };
+
+  const handleInputChange = (text) => {
+    setSearchQuery(text);
+    setIsSearching(text.length > 0); // Update the searching state based on the input length
+  };
+
+  const clearSearch = () => {
+    setSearchQuery('');
+    setIsSearching(false);
+    fetchRecipes(); // Reset the recipes list to the original list when clearing the search
+  };
+
   
   return (
-    <View style={styles.headview}>
+    <View style={[styles.headview, { marginBottom: 20 }]}>
     
       <Header />
       <View style={styles.searchContainer}>
@@ -142,17 +162,24 @@ const RecipeApp = () => {
           style={styles.searchInput}
           placeholder="Search recipes..."
           value={searchQuery}
-          onChangeText={setSearchQuery}
+          onChangeText={handleInputChange}
           onSubmitEditing={handleSearch}
         />
-        <TouchableOpacity style={styles.searchButton} onPress={handleSearch}>
-          <Icon name="search" size={20} color="#1a6cf0" />
-        </TouchableOpacity>
+       {isSearching ? (
+          <TouchableOpacity style={styles.searchButton} onPress={clearSearch}>
+            <Icon name="close" size={20} color="#1a6cf0" />
+          </TouchableOpacity>
+        ) : (
+          <TouchableOpacity style={styles.searchButton} onPress={handleSearch}>
+            <Icon name="search" size={20} color="#1a6cf0" />
+          </TouchableOpacity>
+        )}
+       
       </View>
       <View >
            <Button styles={styles.head} title={viewMode === 'grid' ? 'List View' : 'Grid View'} onPress={toggleViewMode} />
       </View>
-
+<ScrollView>
       <ScrollView>
         <Text></Text>
         {recipes.length === 0 ? (
@@ -160,7 +187,7 @@ const RecipeApp = () => {
         ) : (
           <View style={viewMode === 'grid' ? styles.gridContainer : styles.listContainer}>
 
-            {recipes.map((recipe) => (
+            {recipes .filter((recipe) => !recipe.hidden) .map((recipe) => (
             
               <RecipeCard
                 key={recipe.id}
@@ -168,8 +195,8 @@ const RecipeApp = () => {
                 addToFavorites={addRecipeToFavorites}
                 addNote={addNoteToRecipe}
                 viewMode={viewMode}
-      isFavorite={favorites.some((fav) => fav.id === recipe.id)}
-      toggleVisibility={toggleRecipeVisibility}
+                isFavorite={favorites.some((fav) => fav.id === recipe.id)}
+                toggleVisibility={toggleRecipeVisibility}
               />
               
             ))}
@@ -177,12 +204,16 @@ const RecipeApp = () => {
           </View>
         )}
         <Image source={{ uri: RecipeApp.jpeg }} style={styles.image} />
+        </ScrollView>
+       
+        <View style={styles.favoritesContainer}>
         <Text style={styles.favbar}>Favorites</Text>
+        <ScrollView style={styles.favoritesScrollContainer}>
         {favorites.length === 0 ? (
           <Text>No favorite recipes added.</Text>
         ) : (
           <View style={viewMode === 'grid' ? styles.gridContainer : styles.listContainer}>
-            {favorites.map((recipe) => (
+            {favorites .filter((favorite) => !favorite.hidden) .map((recipe) => (
              
              <RecipeCard
              key={recipe.id}
@@ -190,13 +221,17 @@ const RecipeApp = () => {
              addToFavorites={addRecipeToFavorites}
              addNote={addNoteToRecipe}
              viewMode={viewMode}
-             isFavorite={true} 
+             isFavorite={favorites.some((fav) => fav.id === recipe.id)}
+             toggleVisibility={toggleRecipeVisibility}
            />
          ))}
 
           </View>
         )}
-      </ScrollView>
+        </ScrollView>
+        </View>
+        </ScrollView>
+      
     </View>
   );
 };
@@ -247,14 +282,18 @@ const RecipeCard = ({ recipe, addToFavorites, addNote, viewMode, isFavorite, tog
         )}
         <Image source={{ uri: recipe.jpg }} style={styles.img} />
 
-        {!isFavorite && ( 
+       
         <View style={styles.btn_style}>
-           <Button title={recipe.hidden ? 'Unhide' : 'Hide'} onPress={handleToggleVisibility} />
-          <Button title="Add to Favorites" onPress={handleAddToFavorite}
-           />
+        {!recipe.hidden ? (
+          <Button title="Hide" onPress={handleToggleVisibility} />
+        ) : (
+          <Button title="Unhide" onPress={handleToggleVisibility} />
+        )}
+           {!isFavorite && (  <Button title="Add to Favorites" onPress={handleAddToFavorite}
+           /> )}
      
         </View>
-        )}
+       
         <View>
           <TextInput
             value={note}
@@ -265,13 +304,21 @@ const RecipeCard = ({ recipe, addToFavorites, addNote, viewMode, isFavorite, tog
             <Text>Clear</Text>
           </TouchableOpacity>
         </View>
-   
+  
 
     </View>
+    
 
 
   );
-};
+  const App = () => {
+    return (
+      <fornavigation />
+    );
+  }
+
+        }
+
 
 
 
