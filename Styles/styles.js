@@ -90,7 +90,56 @@ const styles = StyleSheet.create({
 
   favoritesContainer: {
     marginTop: 8,
-  }
+  },
+
+
+  searchInput: {
+    flex: 1,
+  },
+
+  searchContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: '#ffeedd',
+    // backgroundColor: "#ffeedd",
+    borderRadius: 8,
+    padding: 10,
+    fontSize: 16,
+    margin: 10,
+  },
+  icon: {
+    marginLeft: 10,
+  },
+  favoritesScrollContainer: {
+    height: 200,
+  },
+  headview: {
+    flex: 1,
+  },
+
+  notecontainer: {
+
+    padding: 20,
+    borderWidth: 1,
+    borderColor: '#ffeedd',
+    borderRadius: 8,
+
+  },
+  noteinput: {
+    width: '100%',
+    height: 20,
+    borderWidth: 1,
+    // borderColor: 'gray',
+    borderRadius: 5,
+
+
+  },
+
+  buttonText: {
+    color: 'black',
+    fontWeight: 'bold',
+  },
 
 
 });

@@ -296,18 +296,24 @@ const RecipeCard = ({ recipe, addToFavorites, addNote, viewMode, isFavorite, tog
         <RecipeDetails ingredients={recipe.ingredients} instructions={recipe.instructions} />
       )}
 
-      <TextInput
-        value={note}
-        onChangeText={(text) => setNote(text)}
-        placeholder="Add a note..."
-        style={{ flex: 1 }}
-      />
-      <TouchableOpacity onPress={handleAddNote}>
-        <Icon name="trash" size={18} color="#1a6cf0" />
-      </TouchableOpacity>
+      <View style={styles.notecontainer} >
+        <TextInput styles={styles.noteinput}
+          value={note}
+          onChangeText={(text) => setNote(text)}
+          placeholder="Add a note..."
+          style={{ flex: 1 }}
+
+        />
+        <Button title='Save' onPress={handleAddNote} />
+        <TouchableOpacity onPress={handleAddNote}>
+          <Icon name="trash" size={18} color="#1a6cf0" />
+        </TouchableOpacity>
+      </View>
+
     </View>
   );
 };
+
 
 
 
@@ -319,6 +325,8 @@ const App = () => {
     </NavigationCoantianer>
   );
 }
+
+
 
 
 
