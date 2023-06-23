@@ -3,9 +3,9 @@ import { View, Text, Button, Image, TextInput, TouchableOpacity, ScrollView } fr
 import styles from './Styles/styles';
 import Header from './Header/header';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { NavigationContainer } from '@react-navigation/native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import fornavigation from './navigation';
+
+
+
 
 
 
@@ -14,8 +14,8 @@ const RecipeApp = () => {
   const [favorites, setFavorites] = useState([]);
   const [viewMode, setViewMode] = useState('grid');
   const [searchQuery, setSearchQuery] = useState('');
-  const [isSearching, setIsSearching] = useState(false); 
-  
+  const [isSearching, setIsSearching] = useState(false);
+
   useEffect(() => {
     fetchRecipes();
   }, []);
@@ -31,6 +31,7 @@ const RecipeApp = () => {
           'Add ground beef to the pan. Cook until browned and fully cooked' +
           'Stir in tomato sauce, salt, and pepper. Simmer for 10-15 minutes' +
           'Serve the Bolognese sauce over the cooked spaghetti. Optionally, sprinkle grated Parmesan cheese on top',
+        image: require('../CapstoneProject/assets/dish1.jpeg'),
       },
       {
         id: 2,
@@ -42,7 +43,7 @@ const RecipeApp = () => {
           'Add the mixed vegetables to the pan. Stir-fry until they are crisp-tender.' +
           'Pour soy sauce over the chicken and vegetables. Stir well to combine and coat everything evenly.' +
           'Serve the chicken stir-fry over steamed rice or noodles',
-        image: '',
+        image: require('../CapstoneProject/assets/dish1.jpeg'),
       },
       {
         id: 3,
@@ -53,7 +54,7 @@ const RecipeApp = () => {
           'Drizzle the salad with extra virgin olive oil and balsamic vinegar.' +
           'Season with salt and pepper to taste.' +
           'Serve the Caprese salad as an appetizer or side dish',
-        Image: 'img.jpeg',
+        Image: require('../CapstoneProject/assets/dish1.jpeg'),
       },
       {
         id: 4,
@@ -64,7 +65,7 @@ const RecipeApp = () => {
           ' small amount of butter or oil to the pan.Pour a ladleful of the pancake batter onto the pan. Cook until bubbles form on the surface, then flip and cook the other side until golden brown.' +
           'Repeat the process with the remaining batter, adding more butter or oil to the pan as needed.' +
           'Serve the banana pancakes with your favorite toppings, such as maple syrup or fresh fruits',
-        image: 'img.jpeg',
+        image: require('../CapstoneProject/assets/dish1.jpeg'),
       },
       {
         id: 5,
@@ -74,7 +75,7 @@ const RecipeApp = () => {
           'Chop the fresh parsley. In a large bowl, combine the diced cucumber, tomatoes, red onion, Kalamata olives, feta cheese, and fresh parsley.' +
           '  Drizzle extra virgin olive oil and lemon juice over the salad. Season with salt and pepper Toss everything together until well coated.' +
           'Serve the Greek salad as a refreshing and healthy side dish.',
-        image: 'img.jpeg',
+        image: require('../CapstoneProject/assets/dish1.jpeg'),
       },
       {
         id: 6,
@@ -87,7 +88,7 @@ const RecipeApp = () => {
           'Remove the grilled cheese sandwich from the skillet or griddle and let it cool for a minute.' +
           'Cut the sandwich diagonally into halves or quarters, if desired.' +
           'Serve the grilled cheese sandwich warm and enjoy its gooey and comforting goodness!',
-        image: 'img.jpeg',
+        image: require('../CapstoneProject/assets/dish1.jpeg'),
       }
 
     ];
@@ -136,7 +137,7 @@ const RecipeApp = () => {
       return recipe;
     });
     const updatedFavorites = favorites.filter((favorite) => favorite.id !== recipeId);
-  
+
     setRecipes(updatedRecipes);
     setFavorites(updatedFavorites);
   };
@@ -152,10 +153,10 @@ const RecipeApp = () => {
     fetchRecipes(); // Reset the recipes list to the original list when clearing the search
   };
 
-  
+
   return (
     <View style={[styles.headview, { marginBottom: 20 }]}>
-    
+
       <Header />
       <View style={styles.searchContainer}>
         <TextInput
@@ -165,7 +166,7 @@ const RecipeApp = () => {
           onChangeText={handleInputChange}
           onSubmitEditing={handleSearch}
         />
-       {isSearching ? (
+        {isSearching ? (
           <TouchableOpacity style={styles.searchButton} onPress={clearSearch}>
             <Icon name="close" size={20} color="#1a6cf0" />
           </TouchableOpacity>
@@ -174,65 +175,65 @@ const RecipeApp = () => {
             <Icon name="search" size={20} color="#1a6cf0" />
           </TouchableOpacity>
         )}
-       
+
       </View>
       <View >
-           <Button styles={styles.head} title={viewMode === 'grid' ? 'List View' : 'Grid View'} onPress={toggleViewMode} />
+        <Button styles={styles.head} title={viewMode === 'grid' ? 'List View' : 'Grid View'} onPress={toggleViewMode} />
       </View>
-<ScrollView>
       <ScrollView>
-        <Text></Text>
-        {recipes.length === 0 ? (
-          <Text>No recipes available.</Text>
-        ) : (
-          <View style={viewMode === 'grid' ? styles.gridContainer : styles.listContainer}>
+        <ScrollView>
+          <Text></Text>
+          {recipes.length === 0 ? (
+            <Text>No recipes available.</Text>
+          ) : (
+            <View style={viewMode === 'grid' ? styles.gridContainer : styles.listContainer}>
 
-            {recipes .filter((recipe) => !recipe.hidden) .map((recipe) => (
-            
-              <RecipeCard
-                key={recipe.id}
-                recipe={recipe}
-                addToFavorites={addRecipeToFavorites}
-                addNote={addNoteToRecipe}
-                viewMode={viewMode}
-                isFavorite={favorites.some((fav) => fav.id === recipe.id)}
-                toggleVisibility={toggleRecipeVisibility}
-              />
-              
-            ))}
+              {recipes.filter((recipe) => !recipe.hidden).map((recipe) => (
 
-          </View>
-        )}
-        <Image source={{ uri: RecipeApp.jpeg }} style={styles.image} />
+                <RecipeCard
+                  key={recipe.id}
+                  recipe={recipe}
+                  addToFavorites={addRecipeToFavorites}
+                  addNote={addNoteToRecipe}
+                  viewMode={viewMode}
+                  isFavorite={favorites.some((fav) => fav.id === recipe.id)}
+                  toggleVisibility={toggleRecipeVisibility}
+                />
+
+              ))}
+
+            </View>
+          )}
+          <Image source={{ uri: 'img.jpeg' }} style={styles.image} />
         </ScrollView>
-       
-        <View style={styles.favoritesContainer}>
-        <Text style={styles.favbar}>Favorites</Text>
-        <ScrollView style={styles.favoritesScrollContainer}>
-        {favorites.length === 0 ? (
-          <Text>No favorite recipes added.</Text>
-        ) : (
-          <View style={viewMode === 'grid' ? styles.gridContainer : styles.listContainer}>
-            {favorites .filter((favorite) => !favorite.hidden) .map((recipe) => (
-             
-             <RecipeCard
-             key={recipe.id}
-             recipe={recipe}
-             addToFavorites={addRecipeToFavorites}
-             addNote={addNoteToRecipe}
-             viewMode={viewMode}
-             isFavorite={favorites.some((fav) => fav.id === recipe.id)}
-             toggleVisibility={toggleRecipeVisibility}
-           />
-         ))}
 
-          </View>
-        )}
-        </ScrollView>
+        <View style={[styles.favoritesContainer, { borderRadius: 10 }]}>
+          <Text style={styles.favbar}>Favorites</Text>
+          <ScrollView style={styles.favoritesScrollContainer}>
+            {favorites.length === 0 ? (
+              <Text>No favorite recipes added.</Text>
+            ) : (
+              <View style={viewMode === 'grid' ? styles.gridContainer : styles.listContainer}>
+                {favorites.filter((favorite) => !favorite.hidden).map((recipe) => (
+
+                  <RecipeCard
+                    key={recipe.id}
+                    recipe={recipe}
+                    addToFavorites={addRecipeToFavorites}
+                    addNote={addNoteToRecipe}
+                    viewMode={viewMode}
+                    isFavorite={favorites.some((fav) => fav.id === recipe.id)}
+                    toggleVisibility={toggleRecipeVisibility}
+                  />
+                ))}
+
+              </View>
+            )}
+          </ScrollView>
         </View>
-        </ScrollView>
-      
-    </View>
+      </ScrollView>
+
+    </View >
   );
 };
 
@@ -273,51 +274,53 @@ const RecipeCard = ({ recipe, addToFavorites, addNote, viewMode, isFavorite, tog
   return (
 
     <View style={viewMode === 'grid' ? styles.recipeCardGrid : styles.recipeCardList}>
-     
-        <TouchableOpacity onPress={handleToggleDetails}>
-          <Text style={styles.recipeTitle}>{recipe.title}</Text>
+      <TouchableOpacity onPress={handleToggleDetails}>
+        <Text style={styles.recipeTitle}>{recipe.title}</Text>
+      </TouchableOpacity>
+
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity onPress={handleToggleVisibility} style={styles.button}>
+          <Icon name="eye-slash" size={18} color="#1a6cf0" />
+          {/* <Text>{recipe.hidden ? 'Unhide' : 'Hide'}</Text> */}
         </TouchableOpacity>
-        {showDetails && (
-          <RecipeDetails ingredients={recipe.ingredients} instructions={recipe.instructions} />
-        )}
-        <Image source={{ uri: recipe.jpg }} style={styles.img} />
 
-       
-        <View style={styles.btn_style}>
-        {!recipe.hidden ? (
-          <Button title="Hide" onPress={handleToggleVisibility} />
-        ) : (
-          <Button title="Unhide" onPress={handleToggleVisibility} />
-        )}
-           {!isFavorite && (  <Button title="Add to Favorites" onPress={handleAddToFavorite}
-           /> )}
-     
-        </View>
-       
-        <View>
-          <TextInput
-            value={note}
-            onChangeText={(text) => setNote(text)}
-            placeholder="Add a note..."
-          />
-          <TouchableOpacity onPress={handleAddNote}>
-            <Text>Clear</Text>
+        {!isFavorite && (
+          <TouchableOpacity onPress={handleAddToFavorite} style={styles.button}>
+            <Icon name="heart" size={18} color="#ff70a6" />
+            <Text style={styles.buttonText}></Text>
           </TouchableOpacity>
-        </View>
-  
+        )}
+      </View>
 
+      {showDetails && (
+        <RecipeDetails ingredients={recipe.ingredients} instructions={recipe.instructions} />
+      )}
+
+      <TextInput
+        value={note}
+        onChangeText={(text) => setNote(text)}
+        placeholder="Add a note..."
+        style={{ flex: 1 }}
+      />
+      <TouchableOpacity onPress={handleAddNote}>
+        <Icon name="trash" size={18} color="#1a6cf0" />
+      </TouchableOpacity>
     </View>
-    
-
-
   );
-  const App = () => {
-    return (
-      <fornavigation />
-    );
-  }
+};
 
-        }
+
+
+
+const App = () => {
+  return (
+    <NavigationCoantianer>
+      <RecipeApp />
+    </NavigationCoantianer>
+  );
+}
+
+
 
 
 
