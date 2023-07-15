@@ -4,35 +4,46 @@ const styles = StyleSheet.create({
   recipeCardGrid: {
     marginBottom: 3,
     width: '48%',
-    borderWidth: 10,
-    borderColor: '#1ecbe1',
-    // padding: 2,
-  },
-  recipeCardList: {
-    marginBottom: 25,
-    borderWidth: 0.5,
+    height: 'auto',
+    borderWidth: 1,
+    backgroundColor: '#f9e5d8',
+    borderColor: '#ffeedd',
+    padding: 4,
     borderRadius: 10,
-    borderColor: 'black',
-    paddingLeft: 20,
-    display: 'flex',
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
-   
+    // flex: 1,
+    justifyContent: 'center',
+    alignContent: 'center',
+    margin: 2,
+
+  },
+
+
+  recipeCardList: {
+    marginLeft: 8,
+    marginRight: 8,
+    marginBottom: 8,
+    borderWidth: 0.5,
+    borderColor: '#f9e5d8',
+    backgroundColor: '#ffeedd',
+    padding: 8,
+    borderRadius: 10,
+    // flex: 1,
+    justifyContent: 'space-evenly',
+    alignItems: 'center',
+    marginVertical: 10,
+  },
+  recipeCardContainer: {
+    alignItems: 'center',
   },
   recipeTitle: {
     fontWeight: 'bold',
-    fontSize: 13,
-    padding: 10,
-   },
-  btn_style: {
-  
-  },
-  details: {
-    color:'green'
-  },
+    fontSize: 16,
+    padding: 8,
 
+
+    // marginBottom: 100,
+
+  },
   image: {
     width: '100%',
     height: 200,
@@ -42,33 +53,54 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'space-evenly',
-    backgroundColor: '#fffec8', 
-   
+    backgroundColor: '#fdfcfc',  //background color
+    // borderColor: '#1ecbe1',
   },
   listContainer: {
     flexDirection: 'column',
-    backgroundColor: '#fbbf77',
+    backgroundColor: '#fdfcfc',
     borderColor: '#32cd32',
-    justifyContent: 'space-evenly'
+    justifyContent: 'space-evenly',
+    borderRadius: 10,
+
   },
   favbar: {
     marginTop: 12,
     paddingLeft: 10,
     paddingBottom: 10,
-    paddingLeft: 150,
-    fontSize: 15,
+    alignItems: 'flex-start',
+    fontSize: 24,
     fontStyle: 'normal',
-    color: 'green',
-    backgroundColor: '#A5D6A7',
-   
+    color: '#d4a373',
   },
 
   image: {
-    width: 100,
-    height: 100,
+    width: 10,
+    height: 10,
     resizeMode: 'cover',
     marginBottom: 10,
+    alignItems: 'center',
   },
+
+
+  btn_style: {
+    // backgroundColor: '32cd32',
+    borderColor: '#32cd32',
+    alignItems: 'flex-end',
+
+  },
+
+  favoritesScrollContainer: {
+    // backgroundColor: '#32cd32',
+    paddingTop: 0,
+    paddingLeft: 12,
+    paddingRight: 8,
+  },
+
+  favoritesContainer: {
+    marginTop: 8,
+  },
+
 
   searchInput: {
     flex: 1,
@@ -78,26 +110,28 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     borderWidth: 1,
-    borderColor: 'black',
+    borderColor: '#ffeedd',
+    // backgroundColor: "#ffeedd",
     borderRadius: 8,
     padding: 10,
     fontSize: 16,
+    margin: 10,
   },
   icon: {
     marginLeft: 10,
   },
   favoritesScrollContainer: {
-    height: 200, 
+    height: 200,
   },
- headview: {
+  headview: {
     flex: 1,
   },
 
   notecontainer: {
-  
+
     padding: 20,
     borderWidth: 1,
-    borderColor: 'black',
+    borderColor: '#ffeedd',
     borderRadius: 8,
 
   },
@@ -105,17 +139,39 @@ const styles = StyleSheet.create({
     width: '100%',
     height: 20,
     borderWidth: 1,
-    borderColor: 'gray',
+    // borderColor: 'gray',
     borderRadius: 5,
-   
- 
+
+
   },
 
   buttonText: {
     color: 'black',
     fontWeight: 'bold',
   },
+  head: {
+    alignItems: 'flex-end',
+    paddingRight: 16,
+  },
+  buttonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginTop: 10,
+    paddingLeft: 2,
+    paddingRight: 2,
+  },
 
+  notecontainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 10,
+  },
+
+
+  clearButton: {
+    marginLeft: 10,
+  },
 
 });
 
