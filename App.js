@@ -1,21 +1,21 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, Button, Image, TextInput, TouchableOpacity, ScrollView } from 'react-native';
+import { View, Text, Button, Image, TextInput, TouchableOpacity, ScrollView, Alert } from 'react-native';
 import styles from './Styles/styles';
 import Header from './Header/header';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-
-
-
-
-
+const Tab = createBottomTabNavigator();
 const RecipeApp = () => {
   const [recipes, setRecipes] = useState([]);
   const [favorites, setFavorites] = useState([]);
   const [viewMode, setViewMode] = useState('grid');
   const [searchQuery, setSearchQuery] = useState('');
   const [isSearching, setIsSearching] = useState(false);
-
+  const [selectedTags, setSelectedTags] = useState([]);
+  const [tags, setTags] = useState(['pasta', 'chicken', 'salad', 'pancakes', 'sandwich']);
+  const [allRecipes, setAllRecipes] = useState([]);
   useEffect(() => {
     fetchRecipes();
   }, []);
@@ -25,17 +25,19 @@ const RecipeApp = () => {
       {
         id: 1,
         title: 'Pasta Carbonara',
+        tags: ['pasta', 'italian'],
         ingredients: ['Spaghetti', 'Eggs', 'Bacon', 'Parmesan Cheese'],
         instructions: 'Cook the spaghetti according to package instructions. Drain and set aside' +
           'In a large pan, heat olive oil over medium heat. Add minced garlic and diced onion. Cook until onion becomes translucent' +
           'Add ground beef to the pan. Cook until browned and fully cooked' +
           'Stir in tomato sauce, salt, and pepper. Simmer for 10-15 minutes' +
           'Serve the Bolognese sauce over the cooked spaghetti. Optionally, sprinkle grated Parmesan cheese on top',
-        image: require('../CapstoneProject/assets/dish1.jpeg'),
+          //image: require('../Instant_Delicious/assets/pasta_dish1.jpeg'),
       },
       {
         id: 2,
         title: 'Chicken Curry',
+        tags: ['chicken', 'curry'],
         ingredients: ['Chicken', 'Onion', 'Coconut Milk', 'Curry Powder'],
         instructions: 'Cut the chicken breast into small, bite-sized pieces. Season with salt and pepper' +
           'Heat vegetable oil in a large pan or wok over high heat. Add minced garlic and grated ginger. Stir-fry for a minute' +
@@ -43,43 +45,47 @@ const RecipeApp = () => {
           'Add the mixed vegetables to the pan. Stir-fry until they are crisp-tender.' +
           'Pour soy sauce over the chicken and vegetables. Stir well to combine and coat everything evenly.' +
           'Serve the chicken stir-fry over steamed rice or noodles',
-        image: require('../CapstoneProject/assets/dish1.jpeg'),
+         // image: require('../Instant_Delicious/assets/Chicken_dish2.jpeg'),
       },
       {
         id: 3,
         title: 'Caprese Salad',
+         tags: ['salad', 'italian'],
         ingredients: ['Tomatoes, Fresh mozzarella cheese, Fresh basil leaves, Extra virgin olive oil, Balsamic vinegar , Salt, Pepper'],
         instructions: 'Slice the tomatoes and fresh mozzarella into ¼-inch thick slices.Arrange the tomato and mozzarella slices on a serving plate, alternating them.' +
           'Place a fresh basil leaf on top of each tomato and mozzarella slice.' +
           'Drizzle the salad with extra virgin olive oil and balsamic vinegar.' +
           'Season with salt and pepper to taste.' +
           'Serve the Caprese salad as an appetizer or side dish',
-        Image: require('../CapstoneProject/assets/dish1.jpeg'),
+         // image: require('../Instant_Delicious/assets/dish1.jpeg'),
       },
       {
         id: 4,
         title: 'Banana Pancakes',
+        tags: ['pancakes', 'breakfast'],
         ingredients: ['Ripe bananas, All-purpose flour,Milk, Eggs, Baking powder, Salt,Butter or oil (for cooking)'],
         instructions: 'Mash the ripe bananas in a mixing bowl' +
           'Add the all-purpose flour, milk, eggs, baking powder, and salt to the mashed bananas. Stir until well combined.Heat a non-stick pan or griddle over medium heat. Add a' +
           ' small amount of butter or oil to the pan.Pour a ladleful of the pancake batter onto the pan. Cook until bubbles form on the surface, then flip and cook the other side until golden brown.' +
           'Repeat the process with the remaining batter, adding more butter or oil to the pan as needed.' +
           'Serve the banana pancakes with your favorite toppings, such as maple syrup or fresh fruits',
-        image: require('../CapstoneProject/assets/dish1.jpeg'),
+          //image: require('../Instant_Delicious/assets/pancake_dish4.jpeg'),
       },
       {
         id: 5,
         title: 'Greek Salad',
+        tags: ['salad', 'greek'],
         ingredients: ['Cucumber', 'Onion', 'Tomatoes', 'Kalamata olives', 'Feta cheese', 'Extra virgin olive oil', "Lemon juice", 'salt', 'pepper'],
         instructions: 'Dice the cucumber, tomatoes, and red onion into bite-sized pieces. Pit and halve the Kalamata olives.Crumble the feta cheese.' +
           'Chop the fresh parsley. In a large bowl, combine the diced cucumber, tomatoes, red onion, Kalamata olives, feta cheese, and fresh parsley.' +
           '  Drizzle extra virgin olive oil and lemon juice over the salad. Season with salt and pepper Toss everything together until well coated.' +
           'Serve the Greek salad as a refreshing and healthy side dish.',
-        image: require('../CapstoneProject/assets/dish1.jpeg'),
+         // image: require('../Instant_Delicious/assets/greek_dish5.jpeg'),
       },
       {
         id: 6,
         title: 'Grilled Sandwich',
+        tags: ['sandwich'],
         ingredients: ['Bread slices', 'Cheese slices', 'Butter'],
         instructions: 'Heat a non-stick skillet or griddle over medium heat. Butter one side of each bread slice.' +
           'Place a cheese slice between two bread slices, with the buttered sides facing outwards' +
@@ -88,22 +94,22 @@ const RecipeApp = () => {
           'Remove the grilled cheese sandwich from the skillet or griddle and let it cool for a minute.' +
           'Cut the sandwich diagonally into halves or quarters, if desired.' +
           'Serve the grilled cheese sandwich warm and enjoy its gooey and comforting goodness!',
-        image: require('../CapstoneProject/assets/dish1.jpeg'),
+         // image: require('../Instant_Delicious/assets/grilledsand_dish6.jpeg'),
       }
 
     ];
 
     setRecipes(mockRecipes);
+    setAllRecipes(mockRecipes);
   };
-
-
-
   const addRecipeToFavorites = (recipe) => {
-    //const { title, ingredients, instructions } = recipe;
     setFavorites([...favorites, recipe]);
   };
 
-
+  const removeFavorite = (recipeId) => {
+    const updatedFavorites = favorites.filter((favorite) => favorite.id !== recipeId);
+    setFavorites(updatedFavorites);
+  };
 
   const addNoteToRecipe = (recipeId, note) => {
     const updatedRecipes = recipes.map((recipe) => {
@@ -122,12 +128,19 @@ const RecipeApp = () => {
     setViewMode(viewMode === 'grid' ? 'list' : 'grid');
   };
   const handleSearch = () => {
-    const filteredRecipes = recipes.filter((recipe) =>
-      recipe.title.toLowerCase().includes(searchQuery.toLowerCase())
-    );
-
+    const filteredRecipes = recipes.filter((recipe) => {
+      const titleMatch = recipe.title.toLowerCase().includes(searchQuery.toLowerCase());
+      const tagMatch =
+        !recipe.tags ||
+        recipe.tags.length === 0 ||
+        recipe.tags.some((tag) => selectedTags.includes(tag.toLowerCase()));
+      return titleMatch && tagMatch;
+    });
+  
     setRecipes(filteredRecipes);
   };
+  
+  
 
   const toggleRecipeVisibility = (recipeId) => {
     const updatedRecipes = recipes.map((recipe) => {
@@ -144,17 +157,37 @@ const RecipeApp = () => {
 
   const handleInputChange = (text) => {
     setSearchQuery(text);
-    setIsSearching(text.length > 0); // Update the searching state based on the input length
+    setIsSearching(text.length > 0); 
   };
 
   const clearSearch = () => {
     setSearchQuery('');
     setIsSearching(false);
-    fetchRecipes(); // Reset the recipes list to the original list when clearing the search
+    setRecipes(allRecipes);
   };
+
+  const handleTagSelect = (tag) => {
+    if (selectedTags.includes(tag)) {
+      setSelectedTags(selectedTags.filter((t) => t !== tag));
+    } else {
+      setSelectedTags([...selectedTags, tag]);
+    }
+    fetchRecipes();
+  };
+  const addRating = (recipeId, rating) => {
+    const updatedRecipes = recipes.map((recipe) => {
+      if (recipe.id === recipeId) {
+        return { ...recipe, rating };
+      }
+      return recipe;
+    });
+    setRecipes(updatedRecipes);
+  };
+  
 
 
   return (
+    <NavigationContainer>
     <View style={[styles.headview, { marginBottom: 20 }]}>
 
       <Header />
@@ -177,11 +210,44 @@ const RecipeApp = () => {
         )}
 
       </View>
-      <View >
-        <Button styles={styles.head} title={viewMode === 'grid' ? 'List View' : 'Grid View'} onPress={toggleViewMode} />
+
+      <View style={styles.tagsContainer}>
+  {tags.map((tag) => (
+    <TouchableOpacity
+      key={tag}
+      style={[
+        styles.tag,
+        selectedTags.includes(tag) ? styles.selectedTag : null,
+      ]}
+      onPress={() => handleTagSelect(tag)}
+    >
+      <Text style={styles.tagText}>{tag}</Text>
+    </TouchableOpacity>
+  ))}
+</View>
+
+
+      <View>
+        <TouchableOpacity
+          style={styles.head}
+          title={viewMode === 'grid' ? 'List View' : 'Grid View'}
+          onPress={toggleViewMode}
+        >
+          {viewMode === 'grid' ? (
+            <Icon name="th-list" size={20} color="#1a6cf0" />
+          ) : (
+            <Icon name="th-large" size={20} color="#1a6cf0" />
+          )}
+        </TouchableOpacity>
+
+
       </View>
-      <ScrollView>
-        <ScrollView>
+     
+    <Tab.Navigator>
+      <Tab.Screen name='Recipes'>
+        {()=>(
+          <ScrollView>
+            <ScrollView></ScrollView>
           <Text></Text>
           {recipes.length === 0 ? (
             <Text>No recipes available.</Text>
@@ -195,6 +261,7 @@ const RecipeApp = () => {
                   recipe={recipe}
                   addToFavorites={addRecipeToFavorites}
                   addNote={addNoteToRecipe}
+                  addRating={addRating}
                   viewMode={viewMode}
                   isFavorite={favorites.some((fav) => fav.id === recipe.id)}
                   toggleVisibility={toggleRecipeVisibility}
@@ -204,9 +271,12 @@ const RecipeApp = () => {
 
             </View>
           )}
-          <Image source={{ uri: 'img.jpeg' }} style={styles.image} />
+          {/* <Image source={{ uri: 'img.jpeg' }} style={styles.image} /> */}
         </ScrollView>
-
+        )}
+        </Tab.Screen>
+        <Tab.Screen name='Favourites'>
+          {()=>(
         <View style={[styles.favoritesContainer, { borderRadius: 10 }]}>
           <Text style={styles.favbar}>Favorites</Text>
           <ScrollView style={styles.favoritesScrollContainer}>
@@ -220,6 +290,7 @@ const RecipeApp = () => {
                     key={recipe.id}
                     recipe={recipe}
                     addToFavorites={addRecipeToFavorites}
+                    removeFavorite={removeFavorite}
                     addNote={addNoteToRecipe}
                     viewMode={viewMode}
                     isFavorite={favorites.some((fav) => fav.id === recipe.id)}
@@ -228,12 +299,17 @@ const RecipeApp = () => {
                 ))}
 
               </View>
+              
             )}
           </ScrollView>
         </View>
-      </ScrollView>
-
+        
+          )}
+        </Tab.Screen>
+        </Tab.Navigator>
+       
     </View >
+    </NavigationContainer>
   );
 };
 
@@ -249,8 +325,9 @@ const RecipeDetails = ({ ingredients, instructions }) => (
   </View>
 );
 
-const RecipeCard = ({ recipe, addToFavorites, addNote, viewMode, isFavorite, toggleVisibility }) => {
+const RecipeCard = ({ recipe, addToFavorites, removeFavorite, addNote, addRating, viewMode, isFavorite, toggleVisibility }) => {
   const [note, setNote] = useState('');
+  const [rating, setRating] = useState(0);
   const [showDetails, setShowDetails] = useState(false);
 
   const handleAddToFavorite = () => {
@@ -267,15 +344,57 @@ const RecipeCard = ({ recipe, addToFavorites, addNote, viewMode, isFavorite, tog
   };
 
   const handleToggleVisibility = () => {
-    toggleVisibility(recipe.id);
+    Alert.alert(
+      'Confirmation',
+      'Are you sure you want to hide this recipe?',
+      [
+        {
+          text: 'Cancel',
+          style: 'cancel',
+        },
+        {
+          text: 'Okay',
+          onPress: () => {
+            toggleVisibility(recipe.id);
+          },
+        },
+      ]
+    );
+   
+  };
+  const handleRemoveFavorite = () => {
+    Alert.alert(
+      'Confirmation',
+      'Are you sure you want to remove this recipe from favorites?',
+      [
+        {
+          text: 'Cancel',
+          style: 'cancel',
+        },
+        {
+          text: 'Okay',
+          onPress: () => {
+            removeFavorite(recipe.id);
+          },
+        },
+      ]
+    );
   };
 
+
+
+
+  const handleRatingChange = (value) => {
+    setRating(value);
+    addRating(recipe.id, value);
+  };
 
   return (
 
     <View style={viewMode === 'grid' ? styles.recipeCardGrid : styles.recipeCardList}>
       <TouchableOpacity onPress={handleToggleDetails}>
         <Text style={styles.recipeTitle}>{recipe.title}</Text>
+        <Image source={recipe.image} style={{ height: 150, width: 150 }} />
       </TouchableOpacity>
 
       <View style={styles.buttonContainer}>
@@ -286,8 +405,13 @@ const RecipeCard = ({ recipe, addToFavorites, addNote, viewMode, isFavorite, tog
 
         {!isFavorite && (
           <TouchableOpacity onPress={handleAddToFavorite} style={styles.button}>
+            <Icon name="heart-o" size={18} color="#ff70a6" />
+            {/* <Text style={styles.buttonText}></Text> */}
+          </TouchableOpacity>
+        )}
+        {isFavorite && (
+          <TouchableOpacity onPress={handleRemoveFavorite} style={styles.button}>
             <Icon name="heart" size={18} color="#ff70a6" />
-            <Text style={styles.buttonText}></Text>
           </TouchableOpacity>
         )}
       </View>
@@ -295,6 +419,25 @@ const RecipeCard = ({ recipe, addToFavorites, addNote, viewMode, isFavorite, tog
       {showDetails && (
         <RecipeDetails ingredients={recipe.ingredients} instructions={recipe.instructions} />
       )}
+
+<View style={styles.ratingContainer}>
+        <Text style={styles.ratingLabel}>Rate:</Text>
+        <View style={styles.ratingStars}>
+          {[1, 2, 3, 4, 5].map((star) => (
+            <TouchableOpacity
+              key={star}
+              onPress={() => handleRatingChange(star)}
+              style={styles.ratingStar}
+            >
+              <Icon
+                name={star <= rating ? 'star' : 'star-o'}
+                size={18}
+                color={star <= rating ? '#FFD700' : '#D3D3D3'}
+              />
+            </TouchableOpacity>
+          ))}
+        </View>
+      </View>
 
       <View style={styles.notecontainer} >
         <TextInput styles={styles.noteinput}
@@ -311,27 +454,9 @@ const RecipeCard = ({ recipe, addToFavorites, addNote, viewMode, isFavorite, tog
       </View>
 
     </View>
+
+    
   );
 };
-
-
-
-
-
-const App = () => {
-  return (
-    <NavigationCoantianer>
-      <RecipeApp />
-    </NavigationCoantianer>
-  );
-}
-
-
-
-
-
-
-
-
 
 export default RecipeApp;

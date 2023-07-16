@@ -10,7 +10,11 @@ const styles = StyleSheet.create({
     borderColor: '#ffeedd',
     padding: 4,
     borderRadius: 10,
-    // padding: 2,
+    // flex: 1,
+    justifyContent: 'center',
+    alignContent: 'center',
+    margin: 2,
+
   },
 
 
@@ -23,9 +27,13 @@ const styles = StyleSheet.create({
     backgroundColor: '#ffeedd',
     padding: 8,
     borderRadius: 10,
-
-
-
+    // flex: 1,
+    justifyContent: 'space-evenly',
+    alignItems: 'center',
+    marginVertical: 10,
+  },
+  recipeCardContainer: {
+    alignItems: 'center',
   },
   recipeTitle: {
     fontWeight: 'bold',
@@ -71,6 +79,7 @@ const styles = StyleSheet.create({
     height: 10,
     resizeMode: 'cover',
     marginBottom: 10,
+    alignItems: 'center',
   },
 
 
@@ -112,7 +121,7 @@ const styles = StyleSheet.create({
     marginLeft: 10,
   },
   favoritesScrollContainer: {
-    height: 200,
+    height: 800,
   },
   headview: {
     flex: 1,
@@ -140,7 +149,62 @@ const styles = StyleSheet.create({
     color: 'black',
     fontWeight: 'bold',
   },
+  head: {
+    alignItems: 'flex-end',
+    paddingRight: 16,
+  },
+  buttonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginTop: 10,
+    paddingLeft: 2,
+    paddingRight: 2,
+  },
 
+  notecontainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 10,
+  },
+
+
+  clearButton: {
+    marginLeft: 10,
+  },
+  tagsContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 10,
+  },
+  tag: {
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    borderRadius: 20,
+    backgroundColor: '#e1e1e1',
+    marginRight: 10,
+  },
+  selectedTag: {
+    backgroundColor: '#1a6cf0',
+  },
+  tagText: {
+    color: 'black',
+  },
+  ratingContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 10,
+  },
+  ratingLabel: {
+    marginRight: 10,
+  },
+  ratingStars: {
+    flexDirection: 'row',
+  },
+  ratingStar: {
+    marginRight: 5,
+  },
 
 });
 
