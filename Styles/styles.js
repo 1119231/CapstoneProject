@@ -110,7 +110,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     borderWidth: 1,
-    borderColor: '#ffeedd',
+    borderColor: 'black',
     // backgroundColor: "#ffeedd",
     borderRadius: 8,
     padding: 10,
@@ -205,6 +205,7 @@ const styles = StyleSheet.create({
   ratingStar: {
     marginRight: 5,
   },
+
 
 });
 
