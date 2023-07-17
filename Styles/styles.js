@@ -95,6 +95,36 @@ const styles = StyleSheet.create({
     paddingTop: 0,
     paddingLeft: 12,
     paddingRight: 8,
+
+  },
+
+  favoritesContainer: {
+    marginTop: 8,
+  },
+
+
+  searchInput: {
+    flex: 1,
+  },
+
+  searchContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: '#ffeedd',
+    // backgroundColor: "#ffeedd",
+    borderRadius: 8,
+    padding: 10,
+    fontSize: 16,
+    margin: 10,
+  },
+  icon: {
+    marginLeft: 10,
+  },
+  favoritesScrollContainer: {
+    height: 200,
+  },
+
   },
 
   favoritesContainer: {
@@ -123,6 +153,7 @@ const styles = StyleSheet.create({
   favoritesScrollContainer: {
     height: 800,
   },
+
   headview: {
     flex: 1,
   },
@@ -172,6 +203,8 @@ const styles = StyleSheet.create({
   clearButton: {
     marginLeft: 10,
   },
+
+
   tagsContainer: {
     flexDirection: 'row',
     justifyContent: 'center',
@@ -205,6 +238,7 @@ const styles = StyleSheet.create({
   ratingStar: {
     marginRight: 5,
   },
+
 
 
 });
