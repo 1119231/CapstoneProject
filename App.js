@@ -38,7 +38,11 @@ const RecipeApp = () => {
           'Add ground beef to the pan. Cook until browned and fully cooked' +
           'Stir in tomato sauce, salt, and pepper. Simmer for 10-15 minutes' +
           'Serve the Bolognese sauce over the cooked spaghetti. Optionally, sprinkle grated Parmesan cheese on top',
+
           image: require('../Instant_Delicious/assets/pasta_dish1.jpeg'),
+
+         // image: require('../Instant_Delicious/assets/pasta_dish1.jpeg'),
+
       },
       {
         id: 2,
@@ -51,7 +55,15 @@ const RecipeApp = () => {
           'Add the mixed vegetables to the pan. Stir-fry until they are crisp-tender.' +
           'Pour soy sauce over the chicken and vegetables. Stir well to combine and coat everything evenly.' +
           'Serve the chicken stir-fry over steamed rice or noodles',
+
          image: require('../Instant_Delicious/assets/Chicken_dish2.jpeg'),
+
+
+          image: require('../Instant_Delicious/assets/Chicken_dish2.jpeg'),
+
+        //  image: require('../Instant_Delicious/assets/Chicken_dish2.jpeg'),
+
+
       },
       {
         id: 3,
@@ -63,7 +75,11 @@ const RecipeApp = () => {
           'Drizzle the salad with extra virgin olive oil and balsamic vinegar.' +
           'Season with salt and pepper to taste.' +
           'Serve the Caprese salad as an appetizer or side dish',
+
          image: require('../Instant_Delicious/assets/dish1.jpeg'),
+
+        // image: require('../Instant_Delicious/assets/dish1.jpeg'),
+
       },
       {
         id: 4,
@@ -75,7 +91,11 @@ const RecipeApp = () => {
           ' small amount of butter or oil to the pan.Pour a ladleful of the pancake batter onto the pan. Cook until bubbles form on the surface, then flip and cook the other side until golden brown.' +
           'Repeat the process with the remaining batter, adding more butter or oil to the pan as needed.' +
           'Serve the banana pancakes with your favorite toppings, such as maple syrup or fresh fruits',
+
           image: require('../Instant_Delicious/assets/pancake_dish4.jpeg'),
+
+        //  image: require('../Instant_Delicious/assets/pancake_dish4.jpeg'),
+
       },
       {
         id: 5,
@@ -86,7 +106,11 @@ const RecipeApp = () => {
           'Chop the fresh parsley. In a large bowl, combine the diced cucumber, tomatoes, red onion, Kalamata olives, feta cheese, and fresh parsley.' +
           '  Drizzle extra virgin olive oil and lemon juice over the salad. Season with salt and pepper Toss everything together until well coated.' +
           'Serve the Greek salad as a refreshing and healthy side dish.',
+
          image: require('../Instant_Delicious/assets/greek_dish5.jpeg'),
+
+        // image: require('../Instant_Delicious/assets/greek_dish5.jpeg'),
+
       },
       {
         id: 6,
@@ -100,7 +124,9 @@ const RecipeApp = () => {
           'Remove the grilled cheese sandwich from the skillet or griddle and let it cool for a minute.' +
           'Cut the sandwich diagonally into halves or quarters, if desired.' +
           'Serve the grilled cheese sandwich warm and enjoy its gooey and comforting goodness!',
+
           image: require('../Instant_Delicious/assets/grilledsand_dish6.jpeg'),
+
       },
       {
         id: 7,
@@ -169,6 +195,11 @@ const RecipeApp = () => {
           'Cut the sandwich diagonally into halves or quarters, if desired.' +
           'Serve the grilled cheese sandwich warm and enjoy its gooey and comforting goodness!',
           image: require('../Instant_Delicious/assets/biriyani.jpeg'),
+
+
+        //  image: require('../Instant_Delicious/assets/grilledsand_dish6.jpeg'),
+
+
       }
 
     ];
@@ -210,11 +241,24 @@ const RecipeApp = () => {
     });
 
     setRecipes(filteredRecipes);
+   
+    
   };
+
   
+
   useEffect(() => {
      handleSearch();
   }, [searchQuery, selectedTags,allRecipes]);
+
+   
+  useEffect(() => {
+    fetchRecipes();
+  }, [selectedTags]);
+  
+
+
+
   
   const toggleRecipeVisibility = (recipeId) => {
     const updatedRecipes = recipes.map((recipe) => {
@@ -340,7 +384,13 @@ const RecipeApp = () => {
                   key={recipe.id}
                   recipe={recipe}
                   addToFavorites={addRecipeToFavorites}
+
                   removeFavorite={removeFavorite}
+
+
+                  removeFavorite={removeFavorite}
+
+
                   addNote={addNoteToRecipe}
                   addRating={addRating}
                   viewMode={viewMode}

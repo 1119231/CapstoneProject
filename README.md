@@ -1,35 +1,35 @@
 # CapstoneProject
 
-=======
+
 
 GROUP- H
 
-Members-
-Abina Parathandel Nassar
-Akshitha Vinod
-Ashley Shaji
-Elvin Mappilaparambil
+Members-<br>
+Abina Parathandel Nassar<br>
+Akshitha Vinod<br>
+Ashley Shaji<br>
+Elvin Mappilaparambil<br>
 
 App Name- Instant Delicious
 
-Description-
+Description- This is an react native app, offering a delightful culinary experience right at your fingertips. Whether you're a seasoned chef or a beginner in the kitchen, Instant delicious is your ultimate companion for exploring, discovering, and creating mouthwatering recipes.
 
-Features-
-Search for recipes
-Filtering the recipes - user can filter their search options as different categories
-Add the details like food name, ingredients and how to cook
-Share the recipes through social media
-Notification - User will be notified on new alerts 
-Rating -  user can rate others recipe
-Favourites - can add recipes to favourites
-Edit or Delete - users can edit or delete a recipie
-comment - User can add comments for recipies
-settings - (Dark mode/ privacy / change username)
-user login - user can create account using their emailid/ phone
-my account - user can view their profile and their posts, rating etc
-Reminder  users can enable reminder so that they will be notified when it's time for breakfast,lunch, dinner,...
-View (list, grid) 
-Add multiple photos/ upload image
-Follow other members
+Features-<br>
+-User can access a collection of recipes<br>
+-Add recipies to favourite category<br>
+-Add notes to the recipies<br>
+-View recipies content on thumbnail format grid or list format<br>
+-User can search for different recipies <br>
+-Set a reminder for their favourite recipies to cook on time<br>
+-Hide an existing recipe<br>
+-Add images for the recipies<br>
+-Filter recipies based on tags<br>
+-Add rating to the recipies<br>
+-Push notification for newly added recipies<br>
+-App interface can be viewed in dark and light mode<br>
+-Splash screen when app is opened by user<br>
+-Can use copy to clipboard <br>
+-Multi language recipe viewing option<br>
+-Consistent UI experience through the app<br>
 
-> > > > > > > c3835fac74b1635c11d709869c30878df0b812f3
+

@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { View, Text, TouchableOpacity } from 'react-native';
 
 const Hidden = ({ hiddenRecipes, toggleVisibility }) => {
@@ -24,3 +25,14 @@ const Hidden = ({ hiddenRecipes, toggleVisibility }) => {
 };
 
 export default Hidden;
+
+import { View, Text } from 'react-native';
+
+export const Hidden = () => {
+  return (
+    <View style={styles.container}>
+      <Text>This is a blank screen</Text>
+    </View>
+  );
+};
+
