@@ -6,7 +6,7 @@ import Header from './Header/header';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-
+import Hidden from './Hidden';
 import { Clipboard } from 'react-native';
 
 
@@ -18,11 +18,12 @@ const RecipeApp = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [isSearching, setIsSearching] = useState(false);
   const [selectedTags, setSelectedTags] = useState([]);
- 
   const [tags, setTags] = useState(['pasta', 'chicken', 'salad', 'pancakes', 'sandwich']);
   const [allRecipes, setAllRecipes] = useState([]);
+  const [hiddenRecipes, setHiddenRecipes] = useState([]);
   useEffect(() => {
-    fetchRecipes();
+     fetchRecipes();
+    // handleSearch();
   }, []);
 
   const fetchRecipes = () => {
@@ -172,7 +173,7 @@ const RecipeApp = () => {
 
     ];
 
-    setRecipes(mockRecipes);
+   setRecipes(mockRecipes);
     setAllRecipes(mockRecipes);
   };
 
@@ -196,34 +197,25 @@ const RecipeApp = () => {
 
     setRecipes(updatedRecipes);
   };
-
-
-
   const toggleViewMode = () => {
     setViewMode(viewMode === 'grid' ? 'list' : 'grid');
   };
   const handleSearch = () => {
-    const filteredRecipes = recipes.filter((recipe) => {
+    const filteredRecipes = allRecipes.filter((recipe) => {
       const titleMatch = recipe.title.toLowerCase().includes(searchQuery.toLowerCase());
       const tagMatch =
-        !recipe.tags ||
-        recipe.tags.length === 0 ||
+        selectedTags.length === 0 ||
         recipe.tags.some((tag) => selectedTags.includes(tag.toLowerCase()));
       return titleMatch && tagMatch;
     });
-  
+
     setRecipes(filteredRecipes);
-   
-    
   };
-   
+  
   useEffect(() => {
-    fetchRecipes();
-  }, [selectedTags]);
+     handleSearch();
+  }, [searchQuery, selectedTags,allRecipes]);
   
-
-  
-
   const toggleRecipeVisibility = (recipeId) => {
     const updatedRecipes = recipes.map((recipe) => {
       if (recipe.id === recipeId) {
@@ -232,7 +224,7 @@ const RecipeApp = () => {
       return recipe;
     });
     const updatedFavorites = favorites.filter((favorite) => favorite.id !== recipeId);
-
+    setHiddenRecipes(updatedRecipes.filter((recipe) => recipe.hidden));
     setRecipes(updatedRecipes);
     setFavorites(updatedFavorites);
   };
@@ -254,8 +246,9 @@ const RecipeApp = () => {
     } else {
       setSelectedTags([...selectedTags, tag]);
     }
-    fetchRecipes();
+   // fetchRecipes();
   };
+  
   const addRating = (recipeId, rating) => {
     const updatedRecipes = recipes.map((recipe) => {
       if (recipe.id === recipeId) {
@@ -271,11 +264,6 @@ const RecipeApp = () => {
     Alert.alert('Copied to clipboard', 'The recipe instructions have been copied to the clipboard.');
   };
   
-
- 
-  
-
-
   return (
     <NavigationContainer>
     <View style={[styles.headview, { marginBottom: 20 }]}>
@@ -400,6 +388,14 @@ const RecipeApp = () => {
         
           )}
         </Tab.Screen>
+        <Tab.Screen name='HiddenRecipes'>
+            {() => (
+              <Hidden
+                hiddenRecipes={hiddenRecipes}
+                toggleVisibility={toggleRecipeVisibility}
+              />
+            )}
+          </Tab.Screen>
         </Tab.Navigator>
        
     </View >
@@ -408,16 +404,18 @@ const RecipeApp = () => {
 };
 
 const RecipeDetails = ({ ingredients, instructions }) => (
-  <View>
-    <Text style={styles.details}>Ingredients:</Text>
+  
+  <View style={styles.recipeDetails}>
+    <Text style={styles.detailsTitle}>Ingredients:</Text>
     {ingredients.map((ingredient, index) => (
-      <Text key={index}>{ingredient}</Text>
+      <Text key={index} style={styles.detailsText}>{ingredient}</Text>
     ))}
 
-    <Text style={styles.details}>Instructions:</Text>
-    <Text>{instructions}</Text>
+    <Text style={styles.detailsTitle}>Instructions:</Text>
+    <Text style={styles.detailsText}>{instructions}</Text>
   </View>
 );
+
 
 const RecipeCard = ({ recipe, addToFavorites, removeFavorite, addNote, addRating, viewMode, isFavorite, toggleVisibility }) => {
   const [note, setNote] = useState('');
@@ -521,14 +519,10 @@ const RecipeCard = ({ recipe, addToFavorites, removeFavorite, addNote, addRating
   }}
 >
   <Icon name="clipboard" size={18} color="#1a6cf0" />
-  <Text style={styles.buttonText}>Copy to clipboard</Text>
+  
 </TouchableOpacity>
           </View>
       <View style={styles.buttonContainer}>
-
-     
-
-
         <TouchableOpacity onPress={handleToggleVisibility} style={styles.button}>
           <Icon name="eye-slash" size={18} color="#1a6cf0" />
           {/* <Text>{recipe.hidden ? 'Unhide' : 'Hide'}</Text> */}
