@@ -125,7 +125,7 @@ const styles = StyleSheet.create({
     height: 200,
   },
 
-  },
+
 
   favoritesContainer: {
     marginTop: 8,
@@ -241,6 +241,30 @@ const styles = StyleSheet.create({
 
 
 
+});
+
+const lightStyles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#FFF',
+    // Other light mode styles...
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: '#000',
+    // Other light mode styles...
+  },
+  modeButton: {
+    backgroundColor: '#1a6cf0',
+    padding: 10,
+    borderRadius: 8,
+    // Other light mode styles...
+  },
+  modeButtonText: {
+    color: '#FFF',
+    // Other light mode styles...
+  },
 });
 
 export default styles

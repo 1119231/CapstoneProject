@@ -1,11 +1,13 @@
 
 import React, { useState, useEffect } from 'react';
-import { View, Text, Button, Image, TextInput, TouchableOpacity, ScrollView, Alert } from 'react-native';
+import { View, Text, Button, Image, TextInput, TouchableOpacity, ScrollView, Alert , Modal} from 'react-native';
 import styles from './Styles/styles';
 import Header from './Header/header';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
+import { Clipboard } from 'react-native';
 
 
 const Tab = createBottomTabNavigator();
@@ -16,6 +18,7 @@ const RecipeApp = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [isSearching, setIsSearching] = useState(false);
   const [selectedTags, setSelectedTags] = useState([]);
+ 
   const [tags, setTags] = useState(['pasta', 'chicken', 'salad', 'pancakes', 'sandwich']);
   const [allRecipes, setAllRecipes] = useState([]);
   useEffect(() => {
@@ -34,11 +37,7 @@ const RecipeApp = () => {
           'Add ground beef to the pan. Cook until browned and fully cooked' +
           'Stir in tomato sauce, salt, and pepper. Simmer for 10-15 minutes' +
           'Serve the Bolognese sauce over the cooked spaghetti. Optionally, sprinkle grated Parmesan cheese on top',
-
           image: require('../Instant_Delicious/assets/pasta_dish1.jpeg'),
-
-         // image: require('../Instant_Delicious/assets/pasta_dish1.jpeg'),
-
       },
       {
         id: 2,
@@ -51,11 +50,7 @@ const RecipeApp = () => {
           'Add the mixed vegetables to the pan. Stir-fry until they are crisp-tender.' +
           'Pour soy sauce over the chicken and vegetables. Stir well to combine and coat everything evenly.' +
           'Serve the chicken stir-fry over steamed rice or noodles',
-
-          image: require('../Instant_Delicious/assets/Chicken_dish2.jpeg'),
-
-        //  image: require('../Instant_Delicious/assets/Chicken_dish2.jpeg'),
-
+         image: require('../Instant_Delicious/assets/Chicken_dish2.jpeg'),
       },
       {
         id: 3,
@@ -67,11 +62,7 @@ const RecipeApp = () => {
           'Drizzle the salad with extra virgin olive oil and balsamic vinegar.' +
           'Season with salt and pepper to taste.' +
           'Serve the Caprese salad as an appetizer or side dish',
-
          image: require('../Instant_Delicious/assets/dish1.jpeg'),
-
-        // image: require('../Instant_Delicious/assets/dish1.jpeg'),
-
       },
       {
         id: 4,
@@ -83,11 +74,7 @@ const RecipeApp = () => {
           ' small amount of butter or oil to the pan.Pour a ladleful of the pancake batter onto the pan. Cook until bubbles form on the surface, then flip and cook the other side until golden brown.' +
           'Repeat the process with the remaining batter, adding more butter or oil to the pan as needed.' +
           'Serve the banana pancakes with your favorite toppings, such as maple syrup or fresh fruits',
-
           image: require('../Instant_Delicious/assets/pancake_dish4.jpeg'),
-
-        //  image: require('../Instant_Delicious/assets/pancake_dish4.jpeg'),
-
       },
       {
         id: 5,
@@ -98,16 +85,12 @@ const RecipeApp = () => {
           'Chop the fresh parsley. In a large bowl, combine the diced cucumber, tomatoes, red onion, Kalamata olives, feta cheese, and fresh parsley.' +
           '  Drizzle extra virgin olive oil and lemon juice over the salad. Season with salt and pepper Toss everything together until well coated.' +
           'Serve the Greek salad as a refreshing and healthy side dish.',
-
          image: require('../Instant_Delicious/assets/greek_dish5.jpeg'),
-
-        // image: require('../Instant_Delicious/assets/greek_dish5.jpeg'),
-
       },
       {
         id: 6,
         title: 'Grilled Sandwich',
-        tags: ['sandwich'],
+        tags: ['sandwich', 'grilled'],
         ingredients: ['Bread slices', 'Cheese slices', 'Butter'],
         instructions: 'Heat a non-stick skillet or griddle over medium heat. Butter one side of each bread slice.' +
           'Place a cheese slice between two bread slices, with the buttered sides facing outwards' +
@@ -116,11 +99,75 @@ const RecipeApp = () => {
           'Remove the grilled cheese sandwich from the skillet or griddle and let it cool for a minute.' +
           'Cut the sandwich diagonally into halves or quarters, if desired.' +
           'Serve the grilled cheese sandwich warm and enjoy its gooey and comforting goodness!',
-
           image: require('../Instant_Delicious/assets/grilledsand_dish6.jpeg'),
+      },
+      {
+        id: 7,
+        title: 'Classic Tomato Pasta:',
+        tags: ['sandwich','tomato','Classic'],
+        ingredients: ['spaghetti', 'tomato sauce','garlic', 'olive oil','dried oregano'],
+        instructions: 'Cook the spaghetti according to the package instructions. Drain and set asideHeat a non-stick skillet or griddle over medium heat. Butter one side of each bread slice.' +
+          'In a pan, heat olive oil over medium heat. Add minced garlic and cook until fragrant.lace a cheese slice between two bread slices, with the buttered sides facing outwards' +
+          'Add the tomato sauce, dried oregano, salt, and pepper. Simmer for 5 minutes.Place the sandwich onto the heated skillet or griddle.' +
+          'Toss the cooked spaghetti in the tomato sauce until well coated.ook for a few minutes on each side, until the bread turns golden brown and the cheese melts.' +
+          'Serve hot with grated Parmesan cheese on top.Remove the grilled cheese sandwich from the skillet or griddle and let it cool for a minute.' ,
+          image: require('../Instant_Delicious/assets/tomatopasta.jpeg'),
+      },
+      {
+        id: 8,
+        title: 'Chicken Stir-Fry',
+        tags: ['chicken','stir-fry'],
+        ingredients: ['chicken', 'oil', 'soy sauce','garlic','ginger', 'Cooked rice or noodles'],
+        instructions: 'Heat vegetable oil in a large pan or wok over high heat.' +
+          'Add minced garlic and grated ginger. Stir-fry for a minute' +
+          'Add the sliced chicken to the pan. Cook until browned and fully cooked.' +
+          'Add the mixed vegetables to the pan. Stir-fry until they are crisp-tender.' +
+          'Pour soy sauce over the chicken and vegetables. Stir well to combine and coat everything evenly.' +
+          'Serve the chicken stir-fry over steamed rice or noodles.',
+          image: require('../Instant_Delicious/assets/chickenfry.jpeg'),
+      },
+      {
+        id: 9,
+        title: 'Guacamole',
+        tags: ['Guacamole'],
+        ingredients: ['Bread slices', 'Cheese slices', 'Butter'],
+        instructions: 'Heat a non-stick skillet or griddle over medium heat. Butter one side of each bread slice.' +
+          'Place a cheese slice between two bread slices, with the buttered sides facing outwards' +
+          'Place the sandwich onto the heated skillet or griddle.' +
+          'Cook for a few minutes on each side, until the bread turns golden brown and the cheese melts.' +
+          'Remove the grilled cheese sandwich from the skillet or griddle and let it cool for a minute.' +
+          'Cut the sandwich diagonally into halves or quarters, if desired.' +
+          'Serve the grilled cheese sandwich warm and enjoy its gooey and comforting goodness!',
+          image: require('../Instant_Delicious/assets/guacamole.jpeg'),
+      },
+      {
+        id: 10,
+        title: 'Omelette',
+        tags: ['Omelette'],
+        ingredients: ['Bread slices', 'Cheese slices', 'Butter'],
+        instructions: 'Heat a non-stick skillet or griddle over medium heat. Butter one side of each bread slice.' +
+          'Place a cheese slice between two bread slices, with the buttered sides facing outwards' +
+          'Place the sandwich onto the heated skillet or griddle.' +
+          'Cook for a few minutes on each side, until the bread turns golden brown and the cheese melts.' +
+          'Remove the grilled cheese sandwich from the skillet or griddle and let it cool for a minute.' +
+          'Cut the sandwich diagonally into halves or quarters, if desired.' +
+          'Serve the grilled cheese sandwich warm and enjoy its gooey and comforting goodness!',
+          image: require('../Instant_Delicious/assets/Omelette.jpeg'),
+      },
 
-        //  image: require('../Instant_Delicious/assets/grilledsand_dish6.jpeg'),
-
+      {
+        id: 11,
+        title: 'chicken biriyani',
+        tags: ['chicken', 'biriyani'],
+        ingredients: ['Bread slices', 'Cheese slices', 'Butter'],
+        instructions: 'Heat a non-stick skillet or griddle over medium heat. Butter one side of each bread slice.' +
+          'Place a cheese slice between two bread slices, with the buttered sides facing outwards' +
+          'Place the sandwich onto the heated skillet or griddle.' +
+          'Cook for a few minutes on each side, until the bread turns golden brown and the cheese melts.' +
+          'Remove the grilled cheese sandwich from the skillet or griddle and let it cool for a minute.' +
+          'Cut the sandwich diagonally into halves or quarters, if desired.' +
+          'Serve the grilled cheese sandwich warm and enjoy its gooey and comforting goodness!',
+          image: require('../Instant_Delicious/assets/biriyani.jpeg'),
       }
 
     ];
@@ -169,15 +216,11 @@ const RecipeApp = () => {
    
     
   };
-
-  
-
    
   useEffect(() => {
     fetchRecipes();
   }, [selectedTags]);
   
-
 
   
 
@@ -222,6 +265,14 @@ const RecipeApp = () => {
     });
     setRecipes(updatedRecipes);
   };
+
+  const copyInstructionsToClipboard = (instructions) => {
+    Clipboard.setString(instructions);
+    Alert.alert('Copied to clipboard', 'The recipe instructions have been copied to the clipboard.');
+  };
+  
+
+ 
   
 
 
@@ -301,9 +352,7 @@ const RecipeApp = () => {
                   key={recipe.id}
                   recipe={recipe}
                   addToFavorites={addRecipeToFavorites}
-
                   removeFavorite={removeFavorite}
-
                   addNote={addNoteToRecipe}
                   addRating={addRating}
                   viewMode={viewMode}
@@ -427,6 +476,9 @@ const RecipeCard = ({ recipe, addToFavorites, removeFavorite, addNote, addRating
   };
 
 
+  const handleCloseDetails = () => {
+    setShowDetails(false);
+  };
 
 
   const handleRatingChange = (value) => {
@@ -441,11 +493,42 @@ const RecipeCard = ({ recipe, addToFavorites, removeFavorite, addNote, addRating
         <Text style={styles.recipeTitle}>{recipe.title}</Text>
         <Image source={recipe.image} style={{ height: 150, width: 150 }} />
       </TouchableOpacity>
+
+<Modal
+      visible={showDetails}
+      animationType="slide"
+     
+    >
+      <View style={styles.modalContainer}>
+      <TouchableOpacity style={styles.closeButton} onPress={handleCloseDetails}>
+                <Icon name="close" size={18} color="red" />
+          </TouchableOpacity>
+
       {showDetails && (
+
         <View>
+           <Text style={styles.recipeTitle}>{recipe.title}</Text>
+        <Image source={recipe.image} style={{ height: 150, width: 150 }} />
          <RecipeDetails ingredients={recipe.ingredients} instructions={recipe.instructions} />
       <View > 
+
+        <View>
+        <TouchableOpacity
+  style={styles.button}
+  onPress={() => {
+    Clipboard.setString(recipe.instructions);
+    Alert.alert('Copied to clipboard', 'The recipe instructions have been copied to the clipboard.');
+  }}
+>
+  <Icon name="clipboard" size={18} color="#1a6cf0" />
+  <Text style={styles.buttonText}>Copy to clipboard</Text>
+</TouchableOpacity>
+          </View>
       <View style={styles.buttonContainer}>
+
+     
+
+
         <TouchableOpacity onPress={handleToggleVisibility} style={styles.button}>
           <Icon name="eye-slash" size={18} color="#1a6cf0" />
           {/* <Text>{recipe.hidden ? 'Unhide' : 'Hide'}</Text> */}
@@ -484,6 +567,11 @@ const RecipeCard = ({ recipe, addToFavorites, removeFavorite, addNote, addRating
       </View>
        
       )}
+               
+
+   </View>
+     </Modal>
+ 
 
 <View style={styles.ratingContainer}>
         <Text style={styles.ratingLabel}>Rate:</Text>
@@ -506,7 +594,7 @@ const RecipeCard = ({ recipe, addToFavorites, removeFavorite, addNote, addRating
 
 
     </View>
-
+    
     
   );
 };
