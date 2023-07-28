@@ -7,9 +7,11 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Hidden from './Hidden';
-import { Clipboard } from 'react-native';
 
 import { Clipboard } from 'react-native';
+
+
+
 
 
 const Tab = createBottomTabNavigator();
@@ -20,7 +22,6 @@ const RecipeApp = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [isSearching, setIsSearching] = useState(false);
   const [selectedTags, setSelectedTags] = useState([]);
- 
   const [tags, setTags] = useState(['pasta', 'chicken', 'salad', 'pancakes', 'sandwich']);
   const [allRecipes, setAllRecipes] = useState([]);
   const [hiddenRecipes, setHiddenRecipes] = useState([]);
@@ -289,9 +290,8 @@ const RecipeApp = () => {
     });
 
     setRecipes(filteredRecipes);
-   
-    
   };
+
 
 
   
@@ -306,6 +306,12 @@ const RecipeApp = () => {
     fetchRecipes();
   }, [selectedTags]);
   
+
+  
+  useEffect(() => {
+     handleSearch();
+  }, [searchQuery, selectedTags,allRecipes]);
+
   
   const toggleRecipeVisibility = (recipeId) => {
     const updatedRecipes = recipes.map((recipe) => {
@@ -613,15 +619,13 @@ const RecipeCard = ({ recipe, addToFavorites, removeFavorite, addNote, addRating
 >
   <Icon name="clipboard" size={18} color="#1a6cf0" />
 
+
   <Text style={styles.buttonText}>Copy to clipboard</Text>
+
 
 </TouchableOpacity>
           </View>
       <View style={styles.buttonContainer}>
-
-     
-
-
         <TouchableOpacity onPress={handleToggleVisibility} style={styles.button}>
           <Icon name="eye-slash" size={18} color="#1a6cf0" />
           {/* <Text>{recipe.hidden ? 'Unhide' : 'Hide'}</Text> */}

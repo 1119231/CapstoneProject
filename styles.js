@@ -16,8 +16,6 @@ const styles = StyleSheet.create({
     margin: 2,
 
   },
-
-
   recipeCardList: {
     marginLeft: 8,
     marginRight: 8,
@@ -34,27 +32,35 @@ const styles = StyleSheet.create({
   },
   recipeCardContainer: {
     alignItems: 'center',
+    padding: 10,
+    backgroundColor: '#fff',
+    borderRadius: 10,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 3,
+    elevation: 4,
+
   },
   recipeTitle: {
     fontWeight: 'bold',
-    fontSize: 16,
-    padding: 8,
-
-
-    // marginBottom: 100,
+    fontSize: 18,
+    paddingVertical: 10,
+    textAlign: 'center',
+    // color: '#1a6cf0',
 
   },
   image: {
     width: '100%',
-    height: 200,
+    height: 150,
     marginBottom: 10,
+    borderRadius: 10,
   },
   gridContainer: {
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'space-evenly',
-    backgroundColor: '#fdfcfc',  //background color
-    // borderColor: '#1ecbe1',
+    backgroundColor: '#fdfcfc',  
   },
   listContainer: {
     flexDirection: 'column',
@@ -110,7 +116,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     borderWidth: 1,
-    borderColor: '#ffeedd',
+    borderColor: 'black',
     // backgroundColor: "#ffeedd",
     borderRadius: 8,
     padding: 10,
@@ -206,7 +212,43 @@ const styles = StyleSheet.create({
     marginRight: 5,
   },
 
-
+  modalContainer: {
+    flex: 1,
+    padding: 20,
+    justifyContent: 'center',
+    backgroundColor: 'white',
+  },
+  closeButton: {
+    alignSelf: 'flex-end',
+    padding: 10,
+  },
+  closeButtonText: {
+    color: '#1a6cf0',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  recipeDetails: {
+    marginBottom: 20,
+    backgroundColor: '#fff',
+    padding: 15,
+    borderRadius: 10,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 3,
+    elevation: 4,
+  },
+  detailsTitle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginBottom: 10,
+    color: '#1a6cf0',
+  },
+  detailsText: {
+    fontSize: 16,
+    marginBottom: 5,
+    color: '#333',
+  },
 });
 
 export default styles
