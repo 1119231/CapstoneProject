@@ -1,35 +1,6 @@
 import React from 'react';
-
-
-import { View, Text, TouchableOpacity } from 'react-native';
-
-const Hidden = ({ hiddenRecipes, toggleVisibility }) => {
-  return (
-    <View>
-     
-      {hiddenRecipes.length === 0 ? (
-        <Text>No recipes are hidden.</Text>
-      ) : (
-        <View>
-          {hiddenRecipes.map((recipe) => (
-            <View key={recipe.id}>
-              <Text>{recipe.title}</Text>
-              <TouchableOpacity onPress={() => toggleVisibility(recipe.id)}>
-                <Text>Unhide</Text>
-              </TouchableOpacity>
-            </View>
-          ))}
-        </View>
-      )}
-    </View>
-  );
-};
-
-export default Hidden;
-
-import { View, Text } from 'react-native';
-
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity, Image} from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome'; 
 
 
 const Hidden = ({ hiddenRecipes, toggleVisibility }) => {
@@ -43,8 +14,9 @@ const Hidden = ({ hiddenRecipes, toggleVisibility }) => {
           {hiddenRecipes.map((recipe) => (
             <View key={recipe.id}>
               <Text>{recipe.title}</Text>
+              <Image source={recipe.image} style={{ height: 150, width: 150 }} />
               <TouchableOpacity onPress={() => toggleVisibility(recipe.id)}>
-                <Text>Unhide</Text>
+              <Icon name="eye" size={20} color="green" />
               </TouchableOpacity>
             </View>
           ))}
@@ -54,6 +26,4 @@ const Hidden = ({ hiddenRecipes, toggleVisibility }) => {
   );
 };
 
-
 export default Hidden;
-
