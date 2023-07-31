@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
     width: '48%',
     height: 'auto',
     borderWidth: 1,
-    backgroundColor: '#f9e5d8',
+    backgroundColor: '#fffff',
     borderColor: '#ffeedd',
     padding: 4,
     borderRadius: 10,
@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
     marginBottom: 8,
     borderWidth: 0.5,
     borderColor: '#f9e5d8',
-    backgroundColor: '#ffeedd',
+    backgroundColor: '#fffff',
     padding: 8,
     borderRadius: 10,
     // flex: 1,
@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
   recipeCardContainer: {
     alignItems: 'center',
     padding: 10,
-    backgroundColor: '#fff',
+    backgroundColor: '#ffff',
     borderRadius: 10,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
@@ -44,9 +44,9 @@ const styles = StyleSheet.create({
   },
   recipeTitle: {
     fontWeight: 'bold',
-    fontSize: 18,
+    fontSize: 38,
     paddingVertical: 10,
-    textAlign: 'center',
+    textAlign: 'left',
     // color: '#1a6cf0',
 
   },
@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'space-evenly',
-    backgroundColor: '#fdfcfc',  
+    backgroundColor: '#fffff',
   },
   listContainer: {
     flexDirection: 'column',
@@ -117,7 +117,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderWidth: 1,
     borderColor: 'black',
-    // backgroundColor: "#ffeedd",
+    backgroundColor: "#fffff",
     borderRadius: 8,
     padding: 10,
     fontSize: 16,
@@ -135,7 +135,7 @@ const styles = StyleSheet.create({
 
   notecontainer: {
 
-    padding: 20,
+    padding: 2,
     borderWidth: 1,
     borderColor: '#ffeedd',
     borderRadius: 8,
@@ -143,9 +143,9 @@ const styles = StyleSheet.create({
   },
   noteinput: {
     width: '100%',
-    height: 20,
+    height: 30,
     borderWidth: 1,
-    // borderColor: 'gray',
+    borderColor: 'gray',
     borderRadius: 5,
 
 
@@ -161,9 +161,9 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    // justifyContent: 'space-between',
     alignItems: 'center',
-    marginTop: 10,
+    marginTop: 45,
     paddingLeft: 2,
     paddingRight: 2,
   },
@@ -175,9 +175,7 @@ const styles = StyleSheet.create({
   },
 
 
-  clearButton: {
-    marginLeft: 10,
-  },
+
   tagsContainer: {
     flexDirection: 'row',
     justifyContent: 'center',
@@ -213,23 +211,21 @@ const styles = StyleSheet.create({
   },
 
   modalContainer: {
-    flex: 1,
-    padding: 20,
+    flex: 'auto',
+    // padding: 20,
     justifyContent: 'center',
-    backgroundColor: 'white',
+    backgroundColor: '#fffff',
+
+
   },
   closeButton: {
-    alignSelf: 'flex-end',
-    padding: 10,
+    marginLeft: 10,
+
   },
-  closeButtonText: {
-    color: '#1a6cf0',
-    fontSize: 16,
-    fontWeight: 'bold',
-  },
+
   recipeDetails: {
     marginBottom: 20,
-    backgroundColor: '#fff',
+    backgroundColor: '#fffff',
     padding: 15,
     borderRadius: 10,
     shadowColor: '#000',
@@ -239,13 +235,13 @@ const styles = StyleSheet.create({
     elevation: 4,
   },
   detailsTitle: {
-    fontSize: 20,
+    fontSize: 28,
     fontWeight: 'bold',
-    marginBottom: 10,
+    margin: 100,
     color: '#1a6cf0',
   },
   detailsText: {
-    fontSize: 16,
+    fontSize: 20,
     marginBottom: 5,
     color: '#333',
   },
